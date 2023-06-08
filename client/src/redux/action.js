@@ -1,6 +1,6 @@
 import {FILTER_DOG, GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, POST_DOG, ORDER_DOG, FILTER_FROM, PAGINATE} from "./actionTypes";
 import axios from "axios";
-const host = 'https://pidogsback-production.up.railway.app/'
+const host = 'https://pidogsback-production.up.railway.app'
 
 export const searchById = (id) => {  // <== el nombre de la variable que recibe la function puede ser cualquiera: id, idRaza, numero de perro, etc
     const endpoint = `${host}/dogs/` + id;
