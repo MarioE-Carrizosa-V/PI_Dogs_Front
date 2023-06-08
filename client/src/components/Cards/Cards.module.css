@@ -1,0 +1,7 @@
+.cardDisplay{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: initial;
+    background-image: url('https://previews.123rf.com/images/cnuisin/cnuisin1809/cnuisin180900475/109629164-dog-bone-seamless-pattern-vector-dog-paw-doodle-isolated-wallpaper-background.jpg');
+    background-repeat: repeat;
+}

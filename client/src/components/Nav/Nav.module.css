@@ -1,0 +1,30 @@
+.cardDisplay{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+ .button{
+    color: black;
+    background-color: white;
+    font-size: large;
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 5rem; /*bordes redondos*/
+    cursor: pointer;
+    width: auto;
+    height: 2.5rem;
+    margin: 1rem;
+}
+
+.select{
+    font-size: 1.25rem;
+    background-color: silver;
+    color: navy;
+    border-radius: 50px; /*bordes redondos*/
+    border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+    margin: 1rem;
+  }

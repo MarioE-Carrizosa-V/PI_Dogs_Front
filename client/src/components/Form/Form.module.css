@@ -1,0 +1,114 @@
+.image{
+    height:20rem;
+    width:30rem;
+    z-index: -1;
+    size: cover;
+    border-radius: 50px;
+    border-color: blueviolet;
+  
+  } 
+
+.form{
+    color: silver;
+    font-size: x-large;
+    text-transform: uppercase; /*capitalización texto*/
+    font-weight: bolder;
+    font-style: oblique;
+    -webkit-text-stroke: 1px red; /* Ancho y color del borde */
+    background-color: aqua;
+    border-radius: 2rem;
+}
+
+.buttonBack{
+  color: black;
+  background-color: white;
+  font-size: large;
+  border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+  padding: 8px; /*espacio alrededor texto*/
+  text-decoration: none; /*decoración texto*/
+  text-transform: uppercase; /*capitalización texto*/
+  font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+  border-radius: 50px; /*bordes redondos*/
+  cursor: pointer;
+}
+
+.button{
+    color: blue;
+    background-color: silver;
+    font-size: large;
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 50px; /*bordes redondos*/
+    cursor: pointer;
+}
+
+.button:hover {
+    width: 13rem;
+    height: 4rem;
+    font-size: 1.5rem;
+}
+
+
+.input{
+    font-size: 1.25rem;
+    background-color: silver;
+    color: black;
+    border-radius: 50px; /*bordes redondos*/
+    border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+}
+
+.input:hover {
+    width: 20rem;
+    height: 1.8rem;
+    font-size: 1.5rem;
+}
+
+.select{
+  font-size: 1.25rem;
+  background-color: silver;
+  color: navy;
+  border-radius: 50px; /*bordes redondos*/
+  border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+}
+
+.select:hover {
+  width: 15rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+}
+
+.alert{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: purple;
+    background-color: white;
+    width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-radius: 2rem;  
+  }
+
+ .background{
+  background-repeat: auto;
+  background-image: url('https://st4.depositphotos.com/11498520/19767/v/450/depositphotos_197672230-stock-illustration-dog-paw-seamless-pattern-cat.jpg');
+  background-repeat: repeat;
+ }
+
+ .temps{
+  text-align: center;
+  color: black;
+  font-size: x-large;
+  text-transform: uppercase; /*capitalización texto*/
+  font-weight: bolder;
+  font-style: oblique;
+  background-color: silver;
+  border-radius: 2rem;
+  width: 16rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; 
+ }

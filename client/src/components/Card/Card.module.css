@@ -1,0 +1,38 @@
+.temperament{
+    background-position: right;
+    display: inline-block;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.cards{
+    width: 20rem;
+    height: auto;
+    border-radius: 1rem;
+    border: 0.4rem solid black;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(to right, purple, silver);
+    color: #000000;
+    font-size: 1rem;
+    padding: 2rem;
+    margin: 2rem;
+}
+
+.text{
+    color: white;
+    font-size: 1.8rem;
+}
+
+.cardDisplay{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: initial;
+    
+}
+
+.imagen{
+    width: 18rem;
+    height: 16rem;
+}

@@ -1,0 +1,64 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    font-size: auto;
+    padding: 8px; /*espacio alrededor texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 50px; /*bordes redondos*/
+    font-weight: bolder;
+    font-style: oblique;
+    color: black;
+    -webkit-text-stroke: 0.03em  silver;
+    font-size: 4rem;
+    text-align: left; 
+    font-family: Arial Black; 
+    font-weight: bold; 
+    color: blue; 
+    text-shadow: 0 1px 0 #ddd, 0 2px 0 #ccc, 0 3px 0 #bbb, 0 4px 0 #aaa, 0 5px 0 #acacac, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.2), 0 20px 20px rgba(0,0,0,0.15);
+
+}
+
+.button{
+    color: blue;
+    background-color: silver;
+    font-size: large;
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 50px; /*bordes redondos*/
+    cursor: pointer;
+    padding: 1rem;
+    align-items: center;
+    width: 12rem;
+    height: 4rem;
+}
+
+.button:hover{
+    width: 12rem;
+    height: 4rem;
+    font-size: 1.5rem;
+    color: silver;
+    background-color: blue;
+}
+
+.image{
+    border-radius: 50%;
+    background-color: #f0c27b;
+    align-items: center;
+
+}
+
+.background{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-image: url('https://wallpapers.com/images/hd/anime-dog-joaan-and-fushi-3wjgnbss4bt4914i.jpg');
+  
+   }

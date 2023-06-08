@@ -1,0 +1,20 @@
+.search{
+    font-size: 1.25rem;
+    background-color: silver;
+    color: black;
+    border-radius: 50px; /*bordes redondos*/
+    border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+}
+
+.button{
+    color: white;
+    background-color: black;
+    font-size: large;
+    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
+    padding: 8px; /*espacio alrededor texto*/
+    text-decoration: none; /*decoración texto*/
+    text-transform: uppercase; /*capitalización texto*/
+    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
+    border-radius: 50px; /*bordes redondos*/
+    cursor: pointer;
+}
