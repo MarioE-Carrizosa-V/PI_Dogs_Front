@@ -1,9 +1,9 @@
 import {FILTER_DOG, GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, POST_DOG, ORDER_DOG, FILTER_FROM, PAGINATE} from "./actionTypes";
 import axios from "axios";
-const host = 'https://pidogsback-production.up.railway.app'
+const host = 'https://pidogsback-production.up.railway.app/'
 
 export const searchById = (id) => {  // <== el nombre de la variable que recibe la function puede ser cualquiera: id, idRaza, numero de perro, etc
-    const endpoint = `${host}/dogs/` + id;
+    const endpoint = `${host}dogs/` + id;
     return async (dispatch) => {
         const {data} = await axios(endpoint)
           return dispatch({
@@ -14,7 +14,7 @@ export const searchById = (id) => {  // <== el nombre de la variable que recibe 
     };
 
 export const getByTemperament = () => {
-    const endpoint = `${host}/temperament`;
+    const endpoint = `${host}temperament`;
     return async (dispatch) => {
         const {data} = await axios(endpoint)
           return dispatch({
@@ -25,7 +25,7 @@ export const getByTemperament = () => {
     };
 
 export const getByName = (name) => {
-    const endpoint = `${host}/dogsName?name=` + name;
+    const endpoint = `${host}dogsName?name=` + name;
     return async (dispatch) => {
         const {data} = await axios(endpoint)
           return dispatch({
@@ -36,7 +36,7 @@ export const getByName = (name) => {
     };
 
 export const postDog = async ({name, life_span, weight, height, image, temperament}) => {
-    const endpoint = `${host}/dogs/saveDog`;
+    const endpoint = `${host}dogs/saveDog`;
     const {data} = await axios.post(endpoint, {name, life_span, weight, height, image, temperament})
     return (dispatch) => {
           return dispatch({
@@ -47,7 +47,7 @@ export const postDog = async ({name, life_span, weight, height, image, temperame
     };
 
 export const getByBreed = () => {
-    const endpoint = `${host}/dogs`;
+    const endpoint = `${host}dogs`;
     return async (dispatch) => {
         const {data} = await axios(endpoint)
           return dispatch({
