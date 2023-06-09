@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const searchById = (id) => {  // <== el nombre de la variable que recibe la function puede ser cualquiera: id, idRaza, numero de perro, etc
     return async (dispatch) => {
-        const {data} = await axios('dogs/' + id)
+        const {data} = await axios.get('dogs/' + id)
           return dispatch({
              type: GET_ID,
              payload: data,
@@ -13,7 +13,7 @@ export const searchById = (id) => {  // <== el nombre de la variable que recibe 
 
 export const getByTemperament = () => {
     return async (dispatch) => {
-        const {data} = await axios('temperament/')
+        const {data} = await axios.get('temperament/')
           return dispatch({
              type: GET_TEMPERAMENTS,
              payload: data,
@@ -23,7 +23,7 @@ export const getByTemperament = () => {
 
 export const getByName = (name) => {
     return async (dispatch) => {
-        const {data} = await axios('dogsName?name=' + name)
+        const {data} = await axios.get('dogsName?name=' + name)
           return dispatch({
              type: GET_NAME,
              payload: data,
@@ -43,7 +43,7 @@ export const postDog = async ({name, life_span, weight, height, image, temperame
 
 export const getByBreed = () => {
     return async (dispatch) => {
-        const {data} = await axios('dogs/')
+        const {data} = await axios.get('dogs/')
           return dispatch({
              type: GET_BREED,
              payload: data,
