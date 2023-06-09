@@ -18,10 +18,11 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "build": "react-scripts --openssl-legacy-provider build --public-url=./public/",
     "test": "react-scripts --openssl-legacy-provider test",
     "eject": "react-scripts --openssl-legacy-provider eject"
   },
+  
   "eslintConfig": {
     "extends": [
       "react-app",
