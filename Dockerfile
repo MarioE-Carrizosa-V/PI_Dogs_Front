@@ -11,10 +11,10 @@ COPY . /app
 RUN npm install
 
 # Construir la aplicación
-RUN 'npm run build'
+#RUN 'npm run build'
 
 # Expresar el puerto en el que se ejecutará la aplicación
-EXPOSE 3000
+#EXPOSE 3000
 
 # Comando para ejecutar la aplicación
 CMD ["npm", "start"]
