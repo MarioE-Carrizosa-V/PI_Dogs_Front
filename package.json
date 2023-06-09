@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build --public-url=/client/public/index.html",
+    "build": "react-scripts build --public-url=/client/public/index.html",
     "test": "react-scripts --openssl-legacy-provider test",
     "eject": "react-scripts --openssl-legacy-provider eject"
   },
