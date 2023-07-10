@@ -1,26 +1,42 @@
 import { Link, useParams } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import style from './Detail.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { searchById } from '../../redux/action';
-
-
-
+import { searchById, clearDetail} from '../../redux/action';
+import { MutatingDots } from  'react-loader-spinner'
 
 const Detail = () => {
-    const { id } = useParams();
-    let dogById = useSelector(state => state.DogsById)
-        if(dogById.length) {
-        dogById = dogById[0]
-    }
 
+    let dogById = useSelector(state => state.DogsById)
+    const [loading, setLoading] = useState(true); // Estado para controlar la carga
+    const { id } = useParams();
     const dispatch = useDispatch()
 
+        useEffect(() => {
+            if(dogById?.length) {
+            setLoading(false); 
+        } else {
+            const loadData = async () => {
 
-    useEffect(() => {
-        dispatch(searchById(id))
-    }, [id]);
-    
+                setLoading(true)
+                await dispatch(clearDetail());
+                await dispatch(searchById(id))
+                setLoading(false);
+            }
+            loadData()
+        }
+        }, [id]);
+
+        if(dogById?.length) {
+        dogById = dogById[0]
+    }
+        if (loading) {
+      return (
+      <div className={style.cardDisplay}>
+        <MutatingDots   height="100" width="100" color="gray" secondaryColor= 'white' radius='20' ariaLabel="mutating-dots-loading" wrapperClass={style.loader} />
+      </div>// Muestra el mensaje de carga mientras loadinges true
+    )}
+
     return (
     <div className={style.cardDisplay}>
         <div>

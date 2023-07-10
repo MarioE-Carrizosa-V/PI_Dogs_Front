@@ -58,8 +58,8 @@ import style from '../Nav/Nav.module.css'
 
             <select onChange={handleFilterFrom} className={style.select}>
                 <option> Filter From</option>
-                <option value="DB">FromDB</option>
-                <option value="API">FromAPI</option>
+                <option value="DB">Dogs Created</option>
+                <option value="API">Dogs API</option>
             </select>
                 
             <Link to='/dogs/saveDog'> <button className={style.button}> Create Your Dog </button> </Link>

@@ -1,4 +1,4 @@
-import { GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, ORDER_DOG, FILTER_DOG, FILTER_FROM, POST_DOG, SET_PAGE} from "./actionTypes";
+import { GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, ORDER_DOG, FILTER_DOG, FILTER_FROM, POST_DOG, SET_PAGE, CLEAR_DETAIL} from "./actionTypes";
 
 const initialState = {
     DogsById: {},
@@ -70,6 +70,10 @@ const reducer = (state = initialState, {type, payload}) => {
                 return{
                     ...state, message: payload
                 }
+            case CLEAR_DETAIL:
+                return {
+                    ...state, DogsById: null
+                    }
             case SET_PAGE:
                 return {
                 ...state, page: payload,

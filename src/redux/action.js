@@ -1,4 +1,4 @@
-import {FILTER_DOG, GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, POST_DOG, ORDER_DOG, FILTER_FROM, PAGINATE} from "./actionTypes";
+import {FILTER_DOG, GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, POST_DOG, ORDER_DOG, FILTER_FROM, PAGINATE, CLEAR_DETAIL } from "./actionTypes";
 import axios from "axios";
 
 export const searchById = (id) => {  // <== el nombre de la variable que recibe la function puede ser cualquiera: id, idRaza, numero de perro, etc
@@ -71,5 +71,13 @@ export const setPage = (pageNumber) => {
     return {
       type: 'SET_PAGE', payload: pageNumber};
 }
-  
+
+
+export const clearDetail = () => {
+    return function (dispatch){
+        dispatch({
+            type: CLEAR_DETAIL
+        })
+    }
+}
   

@@ -8,3 +8,4 @@ export const FILTER_DOG = 'FILTER_DOG';
 export const ORDER_DOG = 'ORDER_DOG';
 export const PAGINATE = 'PAGINATE'
 export const SET_PAGE = 'SET_PAGE'
+export const CLEAR_DETAIL = 'CLEAR_DETAIL'
