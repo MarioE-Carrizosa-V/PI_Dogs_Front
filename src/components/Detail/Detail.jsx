@@ -1,61 +1,70 @@
-import { Link, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import style from './Detail.module.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { searchById, clearDetail} from '../../redux/action';
-import { MutatingDots } from  'react-loader-spinner'
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearDetail, searchById } from "../../redux/action";
+import style from "./Detail.module.css";
+import { translations } from "../../utils/translations";
 
 const Detail = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const dog = useSelector((state) => state.DogsById);
+  const lang = useSelector((state) => state.language);
+  const t = translations[lang] || translations.ES;
 
-    let dogById = useSelector(state => state.DogsById)
-    const [loading, setLoading] = useState(true); // Estado para controlar la carga
-    const { id } = useParams();
-    const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true);
 
-        useEffect(() => {
-            if(dogById?.length) {
-            setLoading(false); 
-        } else {
-            const loadData = async () => {
+  useEffect(() => {
+    setLoading(true);
+    dispatch(searchById(id)).then(() => setLoading(false));
 
-                setLoading(true)
-                await dispatch(clearDetail());
-                await dispatch(searchById(id))
-                setLoading(false);
-            }
-            loadData()
-        }
-        }, [id]);
+    return () => {
+      dispatch(clearDetail());
+    };
+  }, [id]);
 
-        if(dogById?.length) {
-        dogById = dogById[0]
-    }
-        if (loading) {
-      return (
-      <div className={style.cardDisplay}>
-        <MutatingDots   height="100" width="100" color="gray" secondaryColor= 'white' radius='20' ariaLabel="mutating-dots-loading" wrapperClass={style.loader} />
-      </div>// Muestra el mensaje de carga mientras loadinges true
-    )}
+  const handleBack = () => {
+    navigate("/dogs/");
+  };
 
+  if (loading)
     return (
+      <div className={style.loader}>
+        <h2>{t.loading}</h2>
+      </div>
+    );
+
+  return (
     <div className={style.cardDisplay}>
+      {dog && (
         <div>
-        <Link to='/dogs/'> <button className={style.button}> Back </button> </Link>
-
-        <Link to='/dogs/saveDog'> <button className={style.button}> Create Your Dog </button> </Link>
-
-        <Link to={'/'}> <button className={style.button}> Exit </button> </Link>
-
-
-                <h2 className={style.text}>{dogById.name}</h2>
-                <img className={style.image} src={dogById.image} alt=''/>
-                <p className={style.weight}>Weight in Kg: {dogById.weight}</p>
-                <p className={style.height}>Height in cm: {dogById.height}</p>
-                <p className={style.life}>Life span: {dogById.life_span}</p>
-                <p className={style.temperament}>{dogById.Temperaments? dogById.Temperaments.map((temp) => '  *  ' +temp.temperament): dogById.temperament}</p>
+          <button className={style.button} onClick={handleBack}>
+            {" "}
+            {t.form_back}{" "}
+          </button>
+          <h2 className={style.text}> {dog.name} </h2>
+          <img src={dog.image} alt="" className={style.image} />
+          <h3 className={style.weight}>
+            {" "}
+            {t.detail_weight}: {dog.weight}{" "}
+          </h3>
+          <h3 className={style.height}>
+            {" "}
+            {t.detail_height}: {dog.height}{" "}
+          </h3>
+          <h3 className={style.life}>
+            {" "}
+            {t.detail_life}: {dog.life_span}{" "}
+          </h3>
+          <h3 className={style.temperament}>
+            {" "}
+            {t.detail_temperament}: {dog.temperament}{" "}
+          </h3>
         </div>
+      )}
     </div>
-    )
-}
+  );
+};
 
-export default Detail
+export default Detail;

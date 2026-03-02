@@ -44,20 +44,18 @@ const Paginate = () => {
   }, [currentPage, totalPages]);
 
   return (
-    <div className={style.pagination}>
-      <ul className={style.numPages}>
+    <div className={style.pagues}>
       <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={style.button}> Back </button>
         {displayedPages.map((pageNumber) => (
-          <li
+          <button
             key={pageNumber}
             onClick={() => handlePageChange(pageNumber)}
-            className={pageNumber === currentPage ? style.currentPage : ""}
+            className={pageNumber === currentPage ? style.buttonActive : style.button}
           >
             {pageNumber}
-          </li>
+          </button>
         ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={style.button}> Next </button>
-      </ul>
+      <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={style.button}> Next </button>
     </div>
   );
 }

@@ -16,13 +16,13 @@ const Card = ({id, name, image, temperament}) => {
                 </Link>
               <img src={image} alt='' className={style.imagen}/>
               
-              {
+              {/* {
                 temperament && temperament.length ?
                 temperament.map(temp => temp.temperament  ?
                   <p className={style.temperament} key={temp.temperament}>{temp.temperament} </p>: <p className={style.temperament} key={temp}>{temp}</p>):
                   <p className={style.temperament} key={temperament}>{temperament}</p>
                 
-              }
+              } */}
  
         </div> }
     </div>

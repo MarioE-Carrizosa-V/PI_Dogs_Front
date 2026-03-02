@@ -1,83 +1,197 @@
-import {FILTER_DOG, GET_BREED, GET_ID, GET_NAME, GET_TEMPERAMENTS, POST_DOG, ORDER_DOG, FILTER_FROM, PAGINATE, CLEAR_DETAIL } from "./actionTypes";
+import {
+  FILTER_DOG,
+  GET_BREED,
+  GET_ID,
+  GET_NAME,
+  GET_TEMPERAMENTS,
+  POST_DOG,
+  ORDER_DOG,
+  FILTER_FROM,
+  PAGINATE,
+  SET_PAGE,
+  CLEAR_DETAIL,
+  SET_LANGUAGE,
+  FILTER_BY_TRAIT,
+  RESET_FILTERS,
+  ADD_LOCAL_DOG,
+  LOAD_LOCAL_DOGS,
+} from "./actionTypes";
 import axios from "axios";
+import apiNinjasClient, { mapDogData } from "../api/apiNinjas";
 
-export const searchById = (id) => {  // <== el nombre de la variable que recibe la function puede ser cualquiera: id, idRaza, numero de perro, etc
-    return async (dispatch) => {
-        const {data} = await axios.get('dogs/' + id)
-          return dispatch({
-             type: GET_ID,
-             payload: data,
-            });
-        };
-    };
+export const searchById = (id) => {
+  return async (dispatch) => {
+    try {
+      // Check local dogs first
+      const localDogs = JSON.parse(
+        localStorage.getItem("locallyCreatedDogs") || "[]",
+      );
+      const localDog = localDogs.find((d) => d.id === id);
+      if (localDog) {
+        return dispatch({ type: GET_ID, payload: localDog });
+      }
+
+      const name = id.replace(/-/g, " ");
+      const { data } = await apiNinjasClient.get(`dogs?name=${name}`);
+      const dog = data.length > 0 ? mapDogData(data[0]) : null;
+      return dispatch({
+        type: GET_ID,
+        payload: dog,
+      });
+    } catch (error) {
+      console.error("Error searching by ID:", error);
+    }
+  };
+};
 
 export const getByTemperament = () => {
-    return async (dispatch) => {
-        const {data} = await axios.get('temperament/')
-          return dispatch({
-             type: GET_TEMPERAMENTS,
-             payload: data,
-            });
-        };
-    };
+  return async (dispatch) => {
+    const { data } = await axios.get("temperament/");
+    return dispatch({
+      type: GET_TEMPERAMENTS,
+      payload: data,
+    });
+  };
+};
 
 export const getByName = (name) => {
-    return async (dispatch) => {
-        const {data} = await axios.get('dogsName?name=' + name)
-          return dispatch({
-             type: GET_NAME,
-             payload: data,
-            });
-        };
+  return async (dispatch) => {
+    try {
+      const { data } = await apiNinjasClient.get(`dogs?name=${name}`);
+      const mappedData = data.map(mapDogData);
+
+      // Also search in local dogs
+      const localDogs = JSON.parse(
+        localStorage.getItem("locallyCreatedDogs") || "[]",
+      );
+      const filteredLocal = localDogs.filter((d) =>
+        d.name.toLowerCase().includes(name.toLowerCase()),
+      );
+
+      return dispatch({
+        type: GET_NAME,
+        payload: [...filteredLocal, ...mappedData],
+      });
+    } catch (error) {
+      console.error("Error searching by name:", error);
+    }
+  };
+};
+
+export const postDog = (dogData) => {
+  return (dispatch) => {
+    const expiryDate = Date.now() + 30 * 24 * 60 * 60 * 1000; // 1 month
+    const newDog = {
+      ...dogData,
+      id: `local-${Date.now()}`,
+      createdInDb: true, // Mark as local for filtering
+      expiryDate,
     };
 
-export const postDog = async ({name, life_span, weight, height, image, temperament}) => {
-    const {data} = await axios.post('dogs/saveDog', {name, life_span, weight, height, image, temperament})
-    return (dispatch) => {
-          return dispatch({
-             type: POST_DOG,
-             payload: data,
-            });
-        };
-    };
+    const localDogs = JSON.parse(
+      localStorage.getItem("locallyCreatedDogs") || "[]",
+    );
+    localStorage.setItem(
+      "locallyCreatedDogs",
+      JSON.stringify([...localDogs, newDog]),
+    );
+
+    dispatch({
+      type: ADD_LOCAL_DOG,
+      payload: newDog,
+    });
+  };
+};
+
+export const loadLocalDogs = () => {
+  return (dispatch) => {
+    const localDogs = JSON.parse(
+      localStorage.getItem("locallyCreatedDogs") || "[]",
+    );
+    const now = Date.now();
+    const validDogs = localDogs.filter((dog) => dog.expiryDate > now);
+
+    if (validDogs.length !== localDogs.length) {
+      localStorage.setItem("locallyCreatedDogs", JSON.stringify(validDogs));
+    }
+
+    dispatch({
+      type: LOAD_LOCAL_DOGS,
+      payload: validDogs,
+    });
+  };
+};
 
 export const getByBreed = () => {
-    return async (dispatch) => {
-        const {data} = await axios.get('dogs/')
-          return dispatch({
-             type: GET_BREED,
-             payload: data,
-            });
-        };
-    };
+  return async (dispatch) => {
+    try {
+      const offsets = [0, 20, 40, 60, 80, 100];
+      const requests = offsets.map((offset) =>
+        apiNinjasClient.get(`dogs?min_height=1&offset=${offset}`),
+      );
 
-export const filterDogs = (temperament) => {
-    return {type: FILTER_DOG, payload: temperament}
-}
+      const responses = await Promise.all(requests);
+      const allData = responses
+        .filter((r) => r.data && Array.isArray(r.data))
+        .flatMap((r) => r.data);
 
-export const filterDogsFrom = (temperament) => {
-    return {type: FILTER_FROM, payload: temperament}
-}
+      const mappedData = allData.map(mapDogData);
+
+      // Load local dogs too
+      const localDogs = JSON.parse(
+        localStorage.getItem("locallyCreatedDogs") || "[]",
+      );
+      const now = Date.now();
+      const validLocal = localDogs.filter((dog) => dog.expiryDate > now);
+
+      return dispatch({
+        type: GET_BREED,
+        payload: [...validLocal, ...mappedData],
+      });
+    } catch (error) {
+      console.error("Error getting breeds:", error);
+    }
+  };
+};
+
+export const filterDogsFrom = (origin) => {
+  return { type: FILTER_FROM, payload: origin };
+};
 
 export const orderDogs = (type) => {
-    return {type: ORDER_DOG, payload: type}
-}
+  return { type: ORDER_DOG, payload: type };
+};
+
+export const filterByTrait = (trait, level) => {
+  return { type: FILTER_BY_TRAIT, payload: { trait, level } };
+};
+
+export const resetFilters = () => {
+  return { type: RESET_FILTERS };
+};
 
 export const paginate = (page) => {
- return {type: PAGINATE, payload: page}   
-}
+  return { type: PAGINATE, payload: page };
+};
 
 export const setPage = (pageNumber) => {
-    return {
-      type: 'SET_PAGE', payload: pageNumber};
-}
+  return {
+    type: SET_PAGE,
+    payload: pageNumber,
+  };
+};
 
+export const setLanguage = (lang) => {
+  return {
+    type: SET_LANGUAGE,
+    payload: lang,
+  };
+};
 
 export const clearDetail = () => {
-    return function (dispatch){
-        dispatch({
-            type: CLEAR_DETAIL
-        })
-    }
-}
-  
+  return function (dispatch) {
+    dispatch({
+      type: CLEAR_DETAIL,
+    });
+  };
+};

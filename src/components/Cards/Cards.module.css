@@ -1,7 +1,17 @@
-.cardDisplay{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: initial;
-    background-image: url('https://previews.123rf.com/images/cnuisin/cnuisin1809/cnuisin180900475/109629164-dog-bone-seamless-pattern-vector-dog-paw-doodle-isolated-wallpaper-background.jpg');
-    background-repeat: repeat;
+.cardDisplay {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .cardDisplay {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
 }

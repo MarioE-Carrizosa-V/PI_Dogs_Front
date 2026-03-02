@@ -1,114 +1,147 @@
-.image{
-    height:20rem;
-    width:30rem;
-    z-index: -1;
-    size: cover;
-    border-radius: 50px;
-    border-color: blueviolet;
-  
-  } 
-
-.form{
-    color: silver;
-    font-size: x-large;
-    text-transform: uppercase; /*capitalización texto*/
-    font-weight: bolder;
-    font-style: oblique;
-    -webkit-text-stroke: 1px red; /* Ancho y color del borde */
-    background-color: aqua;
-    border-radius: 2rem;
+.background {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 100%);
 }
 
-.buttonBack{
-  color: black;
-  background-color: white;
-  font-size: large;
-  border: 1px solid #2e518b; /*anchura, estilo y color borde*/
-  padding: 8px; /*espacio alrededor texto*/
-  text-decoration: none; /*decoración texto*/
-  text-transform: uppercase; /*capitalización texto*/
-  font-family: 'Helvetica', sans-serif; /*tipografía texto*/
-  border-radius: 50px; /*bordes redondos*/
+.formContainer {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.imageUploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.preview {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 2px solid var(--accent-color);
+  box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+.fileLabel {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.button{
-    color: blue;
-    background-color: silver;
-    font-size: large;
-    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
-    padding: 8px; /*espacio alrededor texto*/
-    text-decoration: none; /*decoración texto*/
-    text-transform: uppercase; /*capitalización texto*/
-    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
-    border-radius: 50px; /*bordes redondos*/
-    cursor: pointer;
+.fileLabel:hover {
+  background: var(--accent-light);
+  transform: scale(1.05);
 }
 
-.button:hover {
-    width: 13rem;
-    height: 4rem;
-    font-size: 1.5rem;
+.fileInput {
+  display: none;
 }
 
-
-.input{
-    font-size: 1.25rem;
-    background-color: silver;
-    color: black;
-    border-radius: 50px; /*bordes redondos*/
-    border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+.form {
+  color: var(--primary-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  display: block;
 }
 
-.input:hover {
-    width: 20rem;
-    height: 1.8rem;
-    font-size: 1.5rem;
+.input,
+.select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-.select{
-  font-size: 1.25rem;
-  background-color: silver;
-  color: navy;
-  border-radius: 50px; /*bordes redondos*/
-  border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
+.input:focus,
+.select:focus {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.select:hover {
-  width: 15rem;
-  height: 2.5rem;
-  font-size: 1.5rem;
+.button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
 }
 
-.alert{
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: purple;
-    background-color: white;
-    width: 30rem;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border-radius: 2rem;  
-  }
+.button:hover:not(:disabled) {
+  background: var(--accent-light);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+}
 
- .background{
-  background-repeat: auto;
-  background-image: url('https://st4.depositphotos.com/11498520/19767/v/450/depositphotos_197672230-stock-illustration-dog-paw-seamless-pattern-cat.jpg');
-  background-repeat: repeat;
- }
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
- .temps{
-  text-align: center;
-  color: black;
-  font-size: x-large;
-  text-transform: uppercase; /*capitalización texto*/
-  font-weight: bolder;
-  font-style: oblique;
-  background-color: silver;
-  border-radius: 2rem;
-  width: 16rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center; 
- }
+.buttonBack {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--primary-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.buttonBack:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.selectedTemps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tempBadge {
+  background: rgba(52, 152, 219, 0.2);
+  color: var(--accent-color);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.alert {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+}

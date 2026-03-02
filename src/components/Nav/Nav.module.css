@@ -1,30 +1,101 @@
-.cardDisplay{
-    display: flex;
-    flex-wrap: wrap;
-    
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
- .button{
-    color: black;
-    background-color: white;
-    font-size: large;
-    border: 1px solid #2e518b; /*anchura, estilo y color borde*/
-    padding: 8px; /*espacio alrededor texto*/
-    text-decoration: none; /*decoración texto*/
-    text-transform: uppercase; /*capitalización texto*/
-    font-family: 'Helvetica', sans-serif; /*tipografía texto*/
-    border-radius: 5rem; /*bordes redondos*/
-    cursor: pointer;
-    width: auto;
-    height: 2.5rem;
-    margin: 1rem;
+.topRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-.select{
-    font-size: 1.25rem;
-    background-color: silver;
-    color: navy;
-    border-radius: 50px; /*bordes redondos*/
-    border: .2rem solid #2e518b; /*anchura, estilo y color borde*/
-    margin: 1rem;
+.filterRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--primary-text);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.button:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.select,
+.selectSmall {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--primary-text);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.selectSmall {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.select:hover,
+.selectSmall:hover {
+  border-color: var(--accent-color);
+}
+
+.select option,
+.selectSmall option {
+  background: #222;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem;
   }
+}
