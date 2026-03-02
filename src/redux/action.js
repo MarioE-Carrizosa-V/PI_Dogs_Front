@@ -16,8 +16,9 @@ import {
   ADD_LOCAL_DOG,
   LOAD_LOCAL_DOGS,
 } from "./actionTypes";
-import axios from "axios";
+// import axios from "axios";
 import apiNinjasClient, { mapDogData } from "../api/apiNinjas";
+import { temperaments as localTemps } from "../utils/temperaments";
 
 export const searchById = (id) => {
   return async (dispatch) => {
@@ -45,11 +46,15 @@ export const searchById = (id) => {
 };
 
 export const getByTemperament = () => {
-  return async (dispatch) => {
-    const { data } = await axios.get("temperament/");
+  return (dispatch) => {
+    // Using local data instead of backend
+    const mappedTemps = localTemps.map((t, index) => ({
+      id: index + 1,
+      temperament: t,
+    }));
     return dispatch({
       type: GET_TEMPERAMENTS,
-      payload: data,
+      payload: mappedTemps,
     });
   };
 };
