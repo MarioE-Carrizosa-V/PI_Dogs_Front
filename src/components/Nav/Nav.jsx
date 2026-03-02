@@ -43,7 +43,7 @@ const Nav = () => {
     dispatch(getByTemperament());
     dispatch(loadLocalDogs()); // Load local dogs on mount
     if (name) dispatch(getByName(name));
-  }, []);
+  }, [dispatch, name]);
 
   const handleSearch = (searchQuery) => {
     dispatch(getByName(searchQuery));
@@ -115,6 +115,12 @@ const Nav = () => {
             </select>
           </div>
         ))}
+        <button
+          className={style.button}
+          onClick={() => dispatch(resetFilters())}
+        >
+          {t.reset_filters}
+        </button>
       </div>
     </nav>
   );

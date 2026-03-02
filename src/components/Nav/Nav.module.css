@@ -26,7 +26,7 @@ nav {
 .filterRow {
   display: flex;
   gap: 1rem;
-  align-items: center;
+  align-items: end;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
@@ -98,4 +98,28 @@ nav {
   nav {
     padding: 1rem;
   }
+}
+
+.resetButton {
+  background: var(--glass-bg);
+  border: 1px solid var(--accent-color);
+  color: var(--primary-text);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  margin-left: 1rem;
+}
+
+.resetButton:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+}
+
+.resetButton:active {
+  transform: translateY(0);
 }

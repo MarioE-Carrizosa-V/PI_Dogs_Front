@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { postDog, getByTemperament } from "../../redux/action";
+import { useState } from "react";
+import { postDog } from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import validation from "./Validation";
@@ -9,20 +9,21 @@ import { translations } from "../../utils/translations";
 const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const temperaments = useSelector((state) => state.DogsByTemperament);
   const lang = useSelector((state) => state.language);
   const t = translations[lang] || translations.ES;
-
-  useEffect(() => {
-    dispatch(getByTemperament());
-  }, [dispatch]);
 
   const [userData, setUserData] = useState({
     name: "",
     height: "",
     weight: "",
     life_span: "",
-    temperament: [],
+    traits: {
+      energy: 3,
+      trainability: 3,
+      barking: 3,
+      shedding: 3,
+      protectiveness: 3,
+    },
     image: "",
   });
 
@@ -31,7 +32,6 @@ const Form = () => {
     height: "",
     weight: "",
     life_span: "",
-    temperament: "",
     image: "",
   });
 
@@ -54,6 +54,16 @@ const Form = () => {
     );
   };
 
+  const handleTraitChange = (trait, value) => {
+    setUserData({
+      ...userData,
+      traits: {
+        ...userData.traits,
+        [trait]: parseInt(value),
+      },
+    });
+  };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -64,36 +74,31 @@ const Form = () => {
           image: reader.result,
         });
         setImagePreview(reader.result);
+        // Trigger validation for image
+        setErrors((prev) => ({
+          ...prev,
+          image: validation({ ...userData, image: reader.result }).image || "",
+        }));
       };
       reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSelectChange = (event) => {
-    const selectedId = event.target.value;
-    const tempObj = temperaments.find((t) => t.id === parseInt(selectedId));
-
-    if (tempObj && !userData.temperament.includes(tempObj.temperament)) {
-      setUserData({
-        ...userData,
-        temperament: [...userData.temperament, tempObj.temperament],
-      });
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Convert array of temperament strings to the string format expected by Cards component
-    const submissionData = {
-      ...userData,
-      temperament: userData.temperament.join(", "),
-    };
-
-    dispatch(postDog(submissionData));
+    dispatch(postDog(userData));
     alert("Perro creado con éxito (Vence en un mes)");
     navigate("/dogs/");
   };
+
+  const traitOptions = [
+    { key: "energy", label: t.trait_energy },
+    { key: "trainability", label: t.trait_trainability },
+    { key: "barking", label: t.trait_barking },
+    { key: "shedding", label: t.trait_shedding },
+    { key: "protectiveness", label: t.trait_protectiveness },
+  ];
 
   return (
     <div className={style.background}>
@@ -128,25 +133,31 @@ const Form = () => {
         />
         {errors.name && <p className={style.alert}> {errors.name} </p>}
 
-        <label className={style.form}> {t.form_height} </label>
-        <input
-          name="height"
-          value={userData.height}
-          onChange={handleInputChange}
-          className={style.input}
-          placeholder="E.j. 20 - 30"
-        />
-        {errors.height && <p className={style.alert}> {errors.height} </p>}
+        <div className={style.row}>
+          <div className={style.field}>
+            <label className={style.form}> {t.form_height} (cm) </label>
+            <input
+              name="height"
+              value={userData.height}
+              onChange={handleInputChange}
+              className={style.input}
+              placeholder="E.j. 20 - 30"
+            />
+            {errors.height && <p className={style.alert}> {errors.height} </p>}
+          </div>
 
-        <label className={style.form}> {t.form_weight} </label>
-        <input
-          name="weight"
-          value={userData.weight}
-          onChange={handleInputChange}
-          className={style.input}
-          placeholder="E.j. 10 - 15"
-        />
-        {errors.weight && <p className={style.alert}> {errors.weight} </p>}
+          <div className={style.field}>
+            <label className={style.form}> {t.form_weight} (kg) </label>
+            <input
+              name="weight"
+              value={userData.weight}
+              onChange={handleInputChange}
+              className={style.input}
+              placeholder="E.j. 10 - 15"
+            />
+            {errors.weight && <p className={style.alert}> {errors.weight} </p>}
+          </div>
+        </div>
 
         <label className={style.form}> {t.form_life} </label>
         <input
@@ -160,21 +171,26 @@ const Form = () => {
           <p className={style.alert}> {errors.life_span} </p>
         )}
 
-        <label className={style.form}> {t.detail_temperament} </label>
-        <select onChange={handleSelectChange} className={style.select}>
-          <option value="">Seleccionar</option>
-          {temperaments.map((temp) => (
-            <option key={temp.id} value={temp.id}>
-              {temp.temperament}
-            </option>
-          ))}
-        </select>
-        <div className={style.selectedTemps}>
-          {userData.temperament.map((temp, index) => (
-            <span key={index} className={style.tempBadge}>
-              {temp}
-            </span>
-          ))}
+        <div className={style.traitsContainer}>
+          <h3 className={style.traitsTitle}>{t.filter_trait}</h3>
+          <div className={style.traitsGrid}>
+            {traitOptions.map((trait) => (
+              <div key={trait.key} className={style.traitField}>
+                <label className={style.traitLabel}>{trait.label}</label>
+                <select
+                  onChange={(e) => handleTraitChange(trait.key, e.target.value)}
+                  value={userData.traits[trait.key]}
+                  className={style.select}
+                >
+                  <option value="1">1 ({t.level_1})</option>
+                  <option value="2">2 ({t.level_2})</option>
+                  <option value="3">3 ({t.level_3})</option>
+                  <option value="4">4 ({t.level_4})</option>
+                  <option value="5">5 ({t.level_5})</option>
+                </select>
+              </div>
+            ))}
+          </div>
         </div>
 
         <button
@@ -182,7 +198,11 @@ const Form = () => {
           className={style.button}
           disabled={
             Object.values(errors).some((error) => error !== "") ||
-            !userData.image
+            !userData.image ||
+            !userData.name ||
+            !userData.height ||
+            !userData.weight ||
+            !userData.life_span
           }
         >
           {t.form_submit}

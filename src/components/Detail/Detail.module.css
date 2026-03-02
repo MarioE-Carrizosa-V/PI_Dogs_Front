@@ -109,3 +109,36 @@
     margin-right: 0;
   }
 }
+
+.traitsContainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.traitsTitle {
+  font-size: 1.2rem;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.traitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.traitItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.traitItem strong {
+  color: var(--text-main);
+}

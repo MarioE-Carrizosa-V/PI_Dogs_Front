@@ -39,6 +39,8 @@ export const translations = {
     level_3: "Medium",
     level_4: "High",
     level_5: "Very High",
+    reset_filters: "Reset Filters",
+    detail_traits: "Behavioral Traits",
   },
   ES: {
     home_title: "Enciclopedia Canina",
@@ -80,5 +82,7 @@ export const translations = {
     level_3: "Medio",
     level_4: "Alto",
     level_5: "Muy Alto",
+    reset_filters: "Restablecer Filtros",
+    detail_traits: "Características de Comportamiento",
   },
 };

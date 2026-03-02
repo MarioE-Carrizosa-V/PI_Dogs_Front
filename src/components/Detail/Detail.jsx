@@ -22,7 +22,7 @@ const Detail = () => {
     return () => {
       dispatch(clearDetail());
     };
-  }, [id]);
+  }, [id, dispatch]);
 
   const handleBack = () => {
     navigate("/dogs/");
@@ -57,10 +57,39 @@ const Detail = () => {
             {" "}
             {t.detail_life}: {dog.life_span}{" "}
           </h3>
-          <h3 className={style.temperament}>
-            {" "}
-            {t.detail_temperament}: {dog.temperament}{" "}
-          </h3>
+
+          {dog.traits ? (
+            <div className={style.traitsContainer}>
+              <h3 className={style.traitsTitle}>{t.detail_traits}</h3>
+              <div className={style.traitsGrid}>
+                <div className={style.traitItem}>
+                  <span>{t.trait_energy}:</span>{" "}
+                  <strong>{dog.traits.energy}</strong>
+                </div>
+                <div className={style.traitItem}>
+                  <span>{t.trait_trainability}:</span>{" "}
+                  <strong>{dog.traits.trainability}</strong>
+                </div>
+                <div className={style.traitItem}>
+                  <span>{t.trait_barking}:</span>{" "}
+                  <strong>{dog.traits.barking}</strong>
+                </div>
+                <div className={style.traitItem}>
+                  <span>{t.trait_shedding}:</span>{" "}
+                  <strong>{dog.traits.shedding}</strong>
+                </div>
+                <div className={style.traitItem}>
+                  <span>{t.trait_protectiveness}:</span>{" "}
+                  <strong>{dog.traits.protectiveness}</strong>
+                </div>
+              </div>
+            </div>
+          ) : dog.temperament ? (
+            <h3 className={style.temperament}>
+              {" "}
+              {t.detail_temperament}: {dog.temperament}{" "}
+            </h3>
+          ) : null}
         </div>
       )}
     </div>

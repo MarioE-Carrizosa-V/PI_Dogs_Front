@@ -84,6 +84,60 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.field {
+  flex: 1;
+}
+
+.traitsContainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.traitsTitle {
+  font-size: 1rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.traitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.traitField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.traitLabel {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+@media (max-width: 600px) {
+  .traitsGrid {
+    grid-template-columns: 1fr;
+  }
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
 .button {
   background: var(--accent-color);
   color: white;
