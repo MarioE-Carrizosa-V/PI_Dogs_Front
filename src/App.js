@@ -1,7 +1,7 @@
 import "./App.css";
 import { useLocation } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
-import Card from "./components/Card/Card";
+// import Card from "./components/Card/Card";
 import Cards from "./components/Cards/Cards";
 import Detail from "./components/Detail/Detail";
 import Nav from "./components/Nav/Nav";

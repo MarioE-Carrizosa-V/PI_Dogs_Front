@@ -26,7 +26,7 @@ nav {
 .filterRow {
   display: flex;
   gap: 1rem;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;

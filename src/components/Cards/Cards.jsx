@@ -15,7 +15,7 @@ function Cards() {
 
   useEffect(() => {
     dispatch(getByBreed());
-  }, []);
+  }, [dispatch]);
 
   // Obtener los perros correspondientes a la página actual
   const startIndex = (currentPage - 1) * elementsPerPage;
